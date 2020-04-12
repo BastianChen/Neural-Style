@@ -22,7 +22,8 @@ class Trainer:
         self.style_image, _, _ = image_loader(512, style_path)
         self.style_image, self.content_image = self.style_image.to(self.device), self.content_image.to(self.device)
         self.content_weight = 1
-        self.style_weight = 1000
+        self.style_weight = 500
+
     def get_input_param_optimizer(self, input_img):
         '''
         参数优化器搭建
@@ -90,7 +91,7 @@ class Trainer:
 
         return model, style_losses, content_losses
 
-    def transfer(self, image_name, num_steps=300):
+    def transfer(self, image_name, num_steps=350):
         input_img = self.content_image.clone()
         # 如果要使用白噪声，请取消注释以下行：
         # input_img = torch.randn(self.content_image.data.size(), device=self.device)
